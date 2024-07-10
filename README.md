@@ -47,7 +47,7 @@ docker-compose up -d
 
 
 
-### Mobile app
+## Mobile app
 
 ### Dependencies
 

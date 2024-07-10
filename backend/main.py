@@ -12,8 +12,9 @@ from passlib.context import CryptContext
 from lib.utils import create_access_token, verify_token
 from lib.config import ACCESS_TOKEN_EXPIRE_MINUTES
 from lib.user_action_manager import get_user,verify_password,authenticate_user,save_user,check_user_exists,not_autheticated_message,get_users
-from lib.journal_action_manager import get_journals,save_journal,get_journal,delete_journal
+from lib.journal_action_manager import get_journals,save_journal,get_journal,delete_journal,get_filtered_journals
 from lib.auth_manager import verify_token_middleware
+from datetime import datetime
 
 models.Base.metadata.create_all(bind=engine)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -51,7 +52,6 @@ class JournalCreate(BaseModel):
     title: str
     content: str
     category: str
-    date: str
 
 class JournalInDB(BaseModel):
     id: int
@@ -59,6 +59,9 @@ class JournalInDB(BaseModel):
 class JournalOut(BaseModel):
     id: int    
 
+class JournalsOutFiltered(BaseModel):
+    start_date: datetime
+    end_date: datetime
 
 @app.get("/")
 def read_root():
@@ -120,3 +123,7 @@ def read_journals(request: JournalOut,db: Session = Depends(get_db)):
     return {"message": deleted_journal["message"]}
 
 
+@app.get("/get_filtered_journals")
+def read_filtered_journals(request: JournalsOutFiltered, db: Session = Depends(get_db)):
+    filtered_journals = get_filtered_journals(db,request.start_date,request.end_date)
+    return {"message": filtered_journals["message"], "status": filtered_journals["status"], "data": filtered_journals["data"]}

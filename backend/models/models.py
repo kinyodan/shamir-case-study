@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship, declarative_base
+from datetime import datetime
 
 
 Base = declarative_base()
@@ -18,7 +19,7 @@ class Journal(Base):
     title = Column(String)
     content = Column(String)
     category = Column(String)
-    date = Column(String)
+    date = Column(DateTime, default=datetime.utcnow)
     owner = relationship('User', back_populates='journals')
 
 User.journals = relationship('Journal', back_populates='owner')

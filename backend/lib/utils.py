@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from typing import Union
 from jose import JWTError, jwt
 from lib.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from fastapi import HTTPException, status
+
 
 def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
@@ -16,9 +18,10 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
 def verify_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print(payload)
         username: str = payload.get("sub")
         if username is None:
-            return None
+            return False
         return payload
     except JWTError:
-        return None
+        return False

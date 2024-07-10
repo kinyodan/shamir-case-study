@@ -22,7 +22,7 @@ A mobile application and a backend service for personal journaling. Users should
 * CD into the cloned repository folder and then CD into the "/backend" folder
 * Run below commands 
 
-## Building the docker mage 
+### Building the docker mage 
 
 * While having docker installed in your machine (link shared above under dependecies)
 * Step 1: To build the docker image Run

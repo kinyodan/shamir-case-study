@@ -8,12 +8,12 @@ A mobile application and a backend service for personal journaling. Users should
 
 ## Getting Started
 
-### Backend Api
+## Backend Api
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Python version used Python 3.10.12 but should not be a problem with most python distributions , libraries, OS version, etc., needed before installing program.
+* Framework used FastApi version details (FastAPI CLI version: 0.0.4)
 
 ### Installing
 

@@ -28,7 +28,6 @@ A mobile application and a backend service for personal journaling. Users should
 * Step 1: To build the docker image Run
 ```
 docker-compose build
-
 ```
 * Step 2: Start the Docker Containers:
 ```

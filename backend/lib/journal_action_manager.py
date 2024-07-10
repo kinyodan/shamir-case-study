@@ -1,8 +1,11 @@
+from datetime import datetime
+from typing import List
 from pydantic import EmailStr
 from sqlalchemy.orm import Session
+from models.database import get_db
 from models import models
 from passlib.context import CryptContext
-from fastapi import HTTPException, status
+from fastapi import Depends, HTTPException, Query, status
 
 data_success_message = "Data retrieved successfully"
 data_failed_message = "No data retrieved or its empty "
@@ -14,7 +17,7 @@ def set_return_values(db_data):
     return {"message": message, "status": status}
 
 def save_journal(db: Session,request: any):
-    db_journal = models.Journal(owner_id = request.owner_id,title=request.title, content=request.content,category=request.category,date=request.date)
+    db_journal = models.Journal(**request.dict(), date=datetime.utcnow())
     db.add(db_journal)
     db.commit()
     db.refresh(db_journal)
@@ -40,3 +43,16 @@ def delete_journal(db: Session, id: int):
     db.delete(user)
     db.commit()
     return {"message": deleted_message }
+
+def get_filtered_journals( db: Session ,  
+    start_date: datetime = Query(None, description="Start date for filtering journals"),
+    end_date: datetime = Query(None, description="End date for filtering journals"))-> List[models.Journal]:
+    query = db.query(models.Journal)
+    if start_date:
+        query = query.filter(models.Journal.date >= start_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ'))
+    if end_date:
+        query = query.filter(models.Journal.date <= end_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ'))
+    journals = query.all()
+    data_keys = set_return_values(query)
+
+    return {"message": data_keys["message"], "status": data_keys["status"], "data": journals}

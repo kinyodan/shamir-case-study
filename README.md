@@ -43,7 +43,7 @@ docker-compose up -d
    docker-compose exec web alembic upgrade head
    ```
 * If all is well the backend should be up and running on localhost <strong>( http://0.0.0.0:8000/ ) </strong>
-   you can test it using api testng toold like <a href="https://www.postman.com/"> postman <a/> or any others to confirm all is well.
+   you can test it using api testng tools like <a href="https://www.postman.com/"> postman <a/> or any others to confirm all is well.
 
 
 

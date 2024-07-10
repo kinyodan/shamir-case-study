@@ -34,8 +34,8 @@ docker-compose build
 ```
 docker-compose up -d
 ```
-* Step 3: Running Alembic Migrations:
-   Create a New Alembic Revision:
+* Step 3: Running Migrations:
+   Create the migrations:
    ```
    docker-compose exec web alembic revision --autogenerate -m "init"
    ```

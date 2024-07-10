@@ -12,27 +12,37 @@ A mobile application and a backend service for personal journaling. Users should
 
 ### Dependencies
 
-* Python version used Python 3.10.12 but should not be a problem with most python distributions , libraries, OS version, etc., needed before installing program.
-* Framework used FastApi version details (FastAPI CLI version: 0.0.4)
+* Python version used Python 3.10.12 but should not be a problem with most python distributions.
+* Framework used FastApi (a python based framework) version details (FastAPI CLI version: 0.0.4) <a href='https://fastapi.tiangolo.com/#installation'>Fastapi source page here</a>
+* Docker <a href="https://docs.docker.com/engine/install/">find docker source here</a>
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Clone this reposiroty into your local machine ( repo link https://github.com/kinyodan/shamiri-case-study.git )
+* CD into the cloned repository folder and then CD into the "/backend" folder
+* Run below commands 
 
-### Executing program
+## Building the docker mage 
 
-* How to run the program
-* Step-by-step bullets
+* While having docker installed in your machine (link shared above under dependecies)
+* Step 1: To build the docker image Run
 ```
-code blocks for commands
+docker-compose build
+
 ```
-
-
-
-
-
-
+* Step 2: Start the Docker Containers:
+```
+docker-compose up -d
+```
+* Step 3: Running Alembic Migrations:
+   Create a New Alembic Revision:
+   ```
+   docker-compose exec web alembic revision --autogenerate -m "init"
+   ```
+   Apply the Migration:
+   ```
+   docker-compose exec web alembic upgrade head
+   ```
 
 ### Mobile app
 

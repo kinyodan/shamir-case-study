@@ -11,13 +11,17 @@ from typing import Annotated
 from passlib.context import CryptContext
 from lib.utils import create_access_token, verify_token
 from lib.config import ACCESS_TOKEN_EXPIRE_MINUTES
-
+from lib.user_action_manager import get_user,verify_password,authenticate_user,save_user,check_user_exists,not_autheticated_message,get_users
+from lib.journal_action_manager import get_journals,save_journal,get_journal,delete_journal
+from lib.auth_manager import verify_token_middleware
 
 models.Base.metadata.create_all(bind=engine)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
+
+app.middleware('http')(verify_token_middleware)
 
 class UserCreate(BaseModel):
     name: str
@@ -32,41 +36,33 @@ class UserInDB(BaseModel):
     password: str
     email: EmailStr
 
+class UsersInDB(BaseModel):
+    id: int
+    email: EmailStr
+    name: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
-def get_user(db: Session, email: str):
-    return db.query(models.User).filter(models.User.email == email).first()
+class JournalCreate(BaseModel):
+    owner_id: int
+    title: str
+    content: str
+    category: str
+    date: str
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+class JournalInDB(BaseModel):
+    id: int
+
+class JournalOut(BaseModel):
+    id: int    
 
 
-def authenticate_user(db: Session, email: str, password: str):
-    user = get_user(db ,email)
-    if not user:
-        return False
-    if not verify_password(password, user.hashed_password):
-        return False
-    return user
-
-def save_user(db: Session,name: str,email: EmailStr, hashed_password: str):
-    db_user = models.User(name = name,email=email, hashed_password=hashed_password)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
-
-def check_user_exists(db: Session, email: EmailStr):
-    return True if get_user(db,email) else False
- 
-
- 
 @app.get("/")
 def read_root():
     return {"Hello world"}
-
 
 @app.post("/login", response_model=Token)
 async def login_for_access_token(request: UserInDB,db: Session = Depends(get_db),):
@@ -91,11 +87,36 @@ def create_user(request: UserCreate, db: Session = Depends(get_db)):
     if user_exists:
         return {"msg": "sign up failed email already exists "}
     
-    db_user = save_user(db,request.name,request.email,hashed_password)
-    print(db_user)
+    user = save_user(db,request.name,request.email,hashed_password)
+    print(user)
     return {"msg":"Successfully signed up "}
 
-@app.get("/users/")
-def read_users(token: Annotated[str, Depends(oauth2_scheme)],skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    users = db.query(models.User).offset(skip).limit(limit).all()
+@app.get("/users/" )
+def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    users = get_users(db, skip, limit)
     return users
+
+@app.post("/new_journal")
+def read_journals( request: JournalCreate, db: Session = Depends(get_db)):
+    print(request)
+    journal =  save_journal(db,request)
+    return {"message": "Journals created successfully"}
+
+@app.get("/get_journal")
+def read_journals(request: JournalInDB, db: Session = Depends(get_db)):
+    journal= get_journal(db,request.id)
+    return {"message": journal["message"] ,"status": journal["status"] , "data": journal["data"]}
+
+@app.get("/list_journals")
+def read_journals(token: Annotated[str, Depends(oauth2_scheme)],skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    journals = get_journals(db,skip,limit)
+    print(journals["status"])
+    return {"message": journals["message"] , "status": journals["status"] , "data": journals["data"]}
+
+
+@app.post("/delete_journal")
+def read_journals(request: JournalOut,db: Session = Depends(get_db)):
+    deleted_journal = delete_journal(db,request.id)
+    return {"message": deleted_journal["message"]}
+
+

@@ -3,6 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres
+    container_name: shamiri-backend-database
     environment:
       POSTGRES_DB: shamiridb
       POSTGRES_USER: app_user
@@ -11,11 +12,22 @@ services:
       - "5432:5432"
   web:
     build: .
+    image: shamiri-app-backend
     command: uvicorn main:app --host 0.0.0.0 --port 8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+
+  migrate:
+    build: .
+    command: >
+      sh -c "alembic revision --autogenerate -m 'Create user and journal tables' &&
+             alembic upgrade head"
+    volumes:
+      - .:/app
     depends_on:
       - db
     environment:

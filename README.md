@@ -47,10 +47,11 @@ docker-compose up -d
 
 
 ### Tests
-Running the command below while at step 2 above will also run the tests at app initialization so paying attention to the console 
-will show you the runnng test progress and outcome
+Running the command below while at step 2 above will also run the tests at app initialization.
+But to run test yourself, then after the steps outlined in the installation section above have been completed succesfully ,run below
+command on terminal while in the root folder of the application.
 ```
-docker-compose up -d
+docker-compose run test 
 ```
 The test tool used is Pytest 
 

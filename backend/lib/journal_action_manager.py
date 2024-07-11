@@ -21,7 +21,8 @@ def save_journal(db: Session,request: any):
     db.add(db_journal)
     db.commit()
     db.refresh(db_journal)
-    return db_journal
+    status = True if db_journal else False
+    return {"status": status, "data": db_journal}
 
 def get_journal(db: Session, id: int):
     db_data  = db.query(models.Journal).filter(models.Journal.id == id).first()

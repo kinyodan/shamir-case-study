@@ -26,6 +26,8 @@ def get_user(db: Session, email: str):
 
 def get_user_profile(db: Session, id: int):
     data = db.query(models.User).filter(models.User.id == id).first()
+    if not data:
+        return False
     user = {"id": data.id, "name": data.name, "email": data.email}
     return user
 

@@ -11,7 +11,7 @@ from typing import Annotated
 from passlib.context import CryptContext
 from lib.utils import create_access_token, verify_token
 from lib.config import ACCESS_TOKEN_EXPIRE_MINUTES
-from lib.user_action_manager import get_user,verify_password,authenticate_user,save_user,check_user_exists,not_autheticated_message,get_users
+from lib.user_action_manager import get_user,verify_password,authenticate_user,save_user,check_user_exists,get_users,get_user_profile
 from lib.journal_action_manager import get_journals,save_journal,get_journal,delete_journal,get_filtered_journals
 from lib.auth_manager import verify_token_middleware
 from datetime import datetime
@@ -36,6 +36,9 @@ class UserOut(BaseModel):
 class UserInDB(BaseModel):
     password: str
     email: EmailStr
+
+class UserProfile(BaseModel):
+    id: int    
 
 class UsersInDB(BaseModel):
     id: int
@@ -94,6 +97,11 @@ def create_user(request: UserCreate, db: Session = Depends(get_db)):
     print(user)
     return {"msg":"Successfully signed up "}
 
+@app.get("/user_profile/" )
+def read_user(request: UserProfile, db: Session = Depends(get_db)):
+    user = get_user_profile(db,request.id)
+    return user
+
 @app.get("/users/" )
 def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     users = get_users(db, skip, limit)
@@ -116,12 +124,10 @@ def read_journals(token: Annotated[str, Depends(oauth2_scheme)],skip: int = 0, l
     print(journals["status"])
     return {"message": journals["message"] , "status": journals["status"] , "data": journals["data"]}
 
-
 @app.post("/delete_journal")
 def read_journals(request: JournalOut,db: Session = Depends(get_db)):
     deleted_journal = delete_journal(db,request.id)
     return {"message": deleted_journal["message"]}
-
 
 @app.get("/get_filtered_journals")
 def read_filtered_journals(request: JournalsOutFiltered, db: Session = Depends(get_db)):

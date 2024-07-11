@@ -24,9 +24,13 @@ def get_users(db: Session, skip: int ,limit: int):
 def get_user(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
+def get_user_profile(db: Session, id: int):
+    data = db.query(models.User).filter(models.User.id == id).first()
+    user = {"id": data.id, "name": data.name, "email": data.email}
+    return user
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
-
 
 def authenticate_user(db: Session, email: str, password: str):
     user = get_user(db ,email)

@@ -10,6 +10,7 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade fastapi sqlalchemy pydantic python-jose passlib
+ENV PYTHONPATH=/app
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000

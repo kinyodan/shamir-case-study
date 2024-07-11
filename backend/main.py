@@ -1,10 +1,8 @@
 from datetime import timedelta
 from lib.custom_oauth2 import OAuth2EmailPasswordRequestForm
 from pydantic import BaseModel, EmailStr
-
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
-from models import models
 from models.database import engine, get_db
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from typing import Annotated
@@ -16,14 +14,12 @@ from lib.journal_action_manager import get_journals,save_journal,get_journal,del
 from lib.auth_manager import verify_token_middleware
 from datetime import datetime
 
-models.Base.metadata.create_all(bind=engine)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
 
 app.middleware('http')(verify_token_middleware)
-
 class UserCreate(BaseModel):
     name: str
     password: str
@@ -44,8 +40,6 @@ class UsersInDB(BaseModel):
     id: int
     email: EmailStr
     name: str
-
-
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -55,10 +49,8 @@ class JournalCreate(BaseModel):
     title: str
     content: str
     category: str
-
 class JournalInDB(BaseModel):
     id: int
-
 class JournalOut(BaseModel):
     id: int    
 
@@ -85,7 +77,6 @@ async def login_for_access_token(request: UserInDB,db: Session = Depends(get_db)
     )
     return Token(access_token=access_token, token_type="bearer")
 
-
 @app.post("/sign_up/")
 def create_user(request: UserCreate, db: Session = Depends(get_db)):
     hashed_password = pwd_context.hash(request.password)
@@ -100,18 +91,21 @@ def create_user(request: UserCreate, db: Session = Depends(get_db)):
 @app.get("/user_profile/" )
 def read_user(request: UserProfile, db: Session = Depends(get_db)):
     user = get_user_profile(db,request.id)
+    if not user:
+        return {"message":"User profile Not found"}
     return user
 
 @app.get("/users/" )
 def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     users = get_users(db, skip, limit)
+    if not users:
+        return {"message":"Users Not found"}
     return users
 
 @app.post("/new_journal")
-def read_journals( request: JournalCreate, db: Session = Depends(get_db)):
-    print(request)
+def create_journal( request: JournalCreate, db: Session = Depends(get_db)):
     journal =  save_journal(db,request)
-    return {"message": "Journals created successfully"}
+    return {"message": "Journal created","status": journal["status"] ,"data": journal["data"]}
 
 @app.get("/get_journal")
 def read_journals(request: JournalInDB, db: Session = Depends(get_db)):
@@ -119,9 +113,8 @@ def read_journals(request: JournalInDB, db: Session = Depends(get_db)):
     return {"message": journal["message"] ,"status": journal["status"] , "data": journal["data"]}
 
 @app.get("/list_journals")
-def read_journals(token: Annotated[str, Depends(oauth2_scheme)],skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def read_journals(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     journals = get_journals(db,skip,limit)
-    print(journals["status"])
     return {"message": journals["message"] , "status": journals["status"] , "data": journals["data"]}
 
 @app.post("/delete_journal")

@@ -46,6 +46,13 @@ docker-compose up -d
    you can test it using api testng tools like <a href="https://www.postman.com/"> postman <a/> or any others to confirm all is well.
 
 
+### Tests
+Running the command below while at step 2 above will also run the tests at app initialization so paying attention to the console 
+will show you the runnng test progress and outcome
+```
+docker-compose up -d
+```
+The test tool used is Pytest 
 
 ## Mobile app
 

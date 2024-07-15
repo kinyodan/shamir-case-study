@@ -45,6 +45,12 @@ docker-compose up -d
 * If all is well the backend should be up and running on localhost <strong>( http://0.0.0.0:8000/ ) </strong>
    you can test it using api testng tools like <a href="https://www.postman.com/"> postman <a/> or any others to confirm all is well.
 
+  NB: Remember to stop the running service for posgresql since its the databse used on the docker container
+  
+  ```
+  sudo service postgresql stop
+  ```
+
 
 ### Tests
 Running the command at step 2 above will also run the tests at app initialization.

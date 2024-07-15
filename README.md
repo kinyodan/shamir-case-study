@@ -61,6 +61,12 @@ docker-compose run test
 ```
 The test tool used is Pytest 
 
+But also after finishing all the Installation steps outlined above running 
+```
+docker-compose up 
+```
+will run the tests during application start up and you can see the test result output
+
 ## Mobile app
 
 ### Dependencies

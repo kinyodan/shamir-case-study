@@ -11,6 +11,7 @@ class User(Base):
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 class Journal(Base):
     __tablename__ = "journals"
@@ -21,5 +22,6 @@ class Journal(Base):
     category = Column(String)
     date = Column(DateTime, default=datetime.utcnow)
     owner = relationship('User', back_populates='journals')
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 User.journals = relationship('Journal', back_populates='owner')

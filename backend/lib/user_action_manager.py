@@ -35,7 +35,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 def authenticate_user(db: Session, email: str, password: str):
-    user = get_user(db ,email)
+    user = get_user(db ,email)    
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -51,3 +51,13 @@ def save_user(db: Session,name: str,email: EmailStr, hashed_password: str):
 
 def check_user_exists(db: Session, email: EmailStr):
     return True if get_user(db,email) else False
+
+def get_user_by_email(db: Session, user_email: int):
+    return db.query(models.User).filter(models.User.email == user_email).first()
+
+def update_user_data(db: Session, user: models.User, updated_info):
+    user.name = updated_info.name
+    user.email = updated_info.email
+    db.commit()
+    db.refresh(user)
+    return user

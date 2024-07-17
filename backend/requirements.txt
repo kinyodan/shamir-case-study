@@ -8,4 +8,5 @@ python-jose
 alembic
 pytest
 python-dotenv
+fastapi-cors
 passlib[bcrypt]

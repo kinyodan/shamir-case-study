@@ -39,7 +39,7 @@ def test_read_root(test_app):
 def test_sign_up(test_app):
     response = test_app.post("/sign_up/", json={"name": f"Test User{rand_token}", "password": "testpassword", "email": f"testuser{rand_token}@example.com"})
     assert response.status_code == 200
-    assert response.json() == {"msg":"Successfully signed up "}
+    assert response.json() == {"Message":"Successfully signed up "}
 
 def test_login(test_app):
     response = test_app.post("/login", json={"email": f"testuser{rand_token}@example.com", "password": "testpassword"})

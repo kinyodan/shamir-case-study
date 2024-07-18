@@ -18,7 +18,7 @@ A mobile application and a backend service for personal journaling. Users should
 
 ### Installing
 
-* Clone this reposiroty into your local machine ( repo link https://github.com/kinyodan/shamiri-case-study.git )
+* Clone this reposiroty into your local machine ( repo link https://github.com/kinyodan/shamiri-backend-api.git )
 * CD into the cloned repository folder and then CD into the "/backend" folder
 * Run below commands 
 

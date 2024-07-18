@@ -148,8 +148,10 @@ def read_weekly_journals(date: datetime = Query(None), db: Session = Depends(get
     return journals
 
 @app.get("/journals/monthly")
-def read_monthly_journals(year: int, month: int, db: Session = Depends(get_db)):
-    journals = get_monthly_journals(db, year, month)
+def read_monthly_journals(db: Session = Depends(get_db)):
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+    journals = get_monthly_journals(db, current_year, current_month)
     return journals
 
 @app.get("/journals/grouped")

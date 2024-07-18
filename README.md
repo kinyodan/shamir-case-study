@@ -51,7 +51,6 @@ docker-compose up -d
   sudo service postgresql stop
   ```
 
-
 ### Tests
 Running the command at step 2 above will also run the tests at app initialization.
 But to run test yourself, then after the steps outlined in the installation section above have been completed succesfully ,run below
@@ -71,53 +70,24 @@ will run the tests during application start up and you can see the test result o
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Node version used in dvelopemnt; Node v20.12.2.
+* Development framework is Raect Native (Javascript) no typescript
+* Developed using Expo <a href='https://docs.expo.dev/tutorial/create-your-first-app/'> find Expo documentation here </a> 
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Clone this reposiroty into your local machine ( repo link https://github.com/kinyodan/shamiri-mobile-app.git )
+* CD into the cloned repository folder
+* Run below commands 
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* To install modules 
 ```
-code blocks for commands
+ npm install 
 ```
-
-## Help
-
-Any advise for common problems or issues.
+* Start the Expo application 
 ```
-command to run if program contains helper info
+ npx expo start
 ```
-
-## Authors
-
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* There are several other ways to run the application including on your Mobile device as documented here; <a href='https://docs.expo.dev/tutorial/eas/introduction/'>Expo documentation on running the application</a>

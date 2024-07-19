@@ -1,0 +1,563 @@
+{
+	"info": {
+		"_postman_id": "70293605-9502-45cc-9ecb-a795c4b3d7d3",
+		"name": "Shamiri Journals backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34942266",
+		"_collection_link": "https://universal-comet-561927.postman.co/workspace/New-Team-Workspace~cf7a06e5-b7bb-476a-8f89-5972d3a11536/collection/34942266-70293605-9502-45cc-9ecb-a795c4b3d7d3?action=share&source=collection_link&creator=34942266"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-apollo-operation-name",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDE5OUBlbWFpbC5jb20iLCJleHAiOjE3MjA4MzM5MDJ9.C-RHWrd9zL4o-nCQG9hDb1dH27FZp4JS7sFrM37ZeNk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Daniel Kinyo\", \"password\": \"Password01\"}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/login",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Endpoint to login "
+			},
+			"response": []
+		},
+		{
+			"name": "sign_up",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Daniel Kinyo\", \"email\": \"testmail2@email.com\", \"password\": \"Password01\"}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/sign_up",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"sign_up"
+					]
+				},
+				"description": "Endpoint for sign_up"
+			},
+			"response": []
+		},
+		{
+			"name": "user_profile",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDE5OUBlbWFpbC5jb20iLCJleHAiOjE3MjA4MzM5MDJ9.C-RHWrd9zL4o-nCQG9hDb1dH27FZp4JS7sFrM37ZeNk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n    \"id\": 2\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/user_profile",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"user_profile"
+					]
+				},
+				"description": "Endpoint to get user information (safe information) "
+			},
+			"response": []
+		},
+		{
+			"name": "update_user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer<",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Daniel Kinyo\",\"email\": \"testmail2@email.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/update_user",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"update_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_journals",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0bWFpbDJAZW1haWwuY29tIiwiZXhwIjoxNzIxNDA0NDQ2fQ.myRx0aTCEAD_O6SttgOeAuxxNqdX9_W88AhCw-c2eXY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/list_journals",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"list_journals"
+					]
+				},
+				"description": "Endpoint to get Journals list "
+			},
+			"response": []
+		},
+		{
+			"name": "new_journal",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDE5QGVtYWlsLmNvbSIsImV4cCI6MTcyMTEwMTgwMH0.azbuFxhYutuORAJbn0UJDMmsiCXvV8QIwtwjjwtBK9c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owner_id\": 2,\"title\": \"title\",\"content\": \"Finally we just need to iterate through the data set with a .map and send each element in the array to the Card component to be rendered. For this we will write a function and then invoke it inside what is going to be rendered. Here it is!\", \"category\": \"category\"}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/new_journal",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"new_journal"
+					]
+				},
+				"description": "Creating new Journal"
+			},
+			"response": []
+		},
+		{
+			"name": "update_journal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0bWFpbDJAZW1haWwuY29tIiwiZXhwIjoxNzIxNDA0NDQ2fQ.myRx0aTCEAD_O6SttgOeAuxxNqdX9_W88AhCw-c2eXY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Updated Title\",\n    \"content\": \"Updated Content\",\n    \"category\": \"Updated Category\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/update_journal/{journal_id}",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"update_journal",
+						"{journal_id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_journal",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDE5QGVtYWlsLmNvbSIsImV4cCI6MTcyMTEwMTgwMH0.azbuFxhYutuORAJbn0UJDMmsiCXvV8QIwtwjjwtBK9c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 12}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/delete_journal",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"delete_journal"
+					]
+				},
+				"description": "Deleting Journals"
+			},
+			"response": []
+		},
+		{
+			"name": "get_filtered_journals",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlbWFpbDE5OUBlbWFpbC5jb20iLCJleHAiOjE3MjA4MzM5MDJ9.C-RHWrd9zL4o-nCQG9hDb1dH27FZp4JS7sFrM37ZeNk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n    \"start_date\": \"2024-07-09 21:50:08.00000\",\n    \"end_date\": \"2024-07-11 23:59:59.999999\"\n}"
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/get_filtered_journals",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"get_filtered_journals"
+					]
+				},
+				"description": "Endpoint to get journals filtered by period ie from start_data to end_date"
+			},
+			"response": []
+		},
+		{
+			"name": "journals/daily",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0bWFpbDJAZW1haWwuY29tIiwiZXhwIjoxNzIxMjU1MzMxfQ.n-FVBqxoI2E62GccbAc1OPVvh-kdsK6FQaTiTDBr5rs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/journals/daily",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"journals",
+						"daily"
+					]
+				},
+				"description": "Endpoint to get Journals by day "
+			},
+			"response": []
+		},
+		{
+			"name": "journals/grouped",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0bWFpbDJAZW1haWwuY29tIiwiZXhwIjoxNzIxNDA0NDQ2fQ.myRx0aTCEAD_O6SttgOeAuxxNqdX9_W88AhCw-c2eXY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/journals/grouped",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"journals",
+						"grouped"
+					]
+				},
+				"description": "Endpoint to get Journals grouped by category each category with all the journals that are saved with it "
+			},
+			"response": []
+		},
+		{
+			"name": "journals/weekly",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer<",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/journals/weekly",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"journals",
+						"weekly"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "journals/monthly",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0bWFpbDJAZW1haWwuY29tIiwiZXhwIjoxNzIxMjU1MzMxfQ.n-FVBqxoI2E62GccbAc1OPVvh-kdsK6FQaTiTDBr5rs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/journals/monthly",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"journals",
+						"monthly"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -51,7 +51,7 @@ docker-compose up -d
   sudo service postgresql stop
   ```
 ### API documentation
-You can find Api endpoint documentation on this shared Postman link  to the api endpoint collection <a href="https://universal-comet-561927.postman.co/workspace/New-Team-Workspace~cf7a06e5-b7bb-476a-8f89-5972d3a11536/collection/34942266-70293605-9502-45cc-9ecb-a795c4b3d7d3?action=share&creator=34942266" > Here is the link to the collections workspace</a>
+You can find Api endpoint documentation on this shared Postman link  to the api endpoint collection <a href="https://universal-comet-561927.postman.co/workspace/Journals-backend-API~78c1185a-473f-43c0-bee0-1fbc1c846fee/collection/34942266-70293605-9502-45cc-9ecb-a795c4b3d7d3?action=share&creator=34942266" > Here is the link to the collections workspace</a>
 
 Or a json version of it that is part of the shamiri-backend-api repository here <a href="https://github.com/kinyodan/shamiri-backend-api/blob/master/Shamiri%20Journals%20backend%20API.postman_collection.json"> json version </a>
 
